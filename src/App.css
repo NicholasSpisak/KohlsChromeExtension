@@ -1,45 +1,36 @@
-import React, { useState } from 'react';
+.app {
+  text-align: center;
+  margin: 20px;
+}
 
-const App = () => {
-  const [upc, setUpc] = useState('');
-  const [apiResponse, setApiResponse] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
-  const handleUpcChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUpc(event.target.value);
-  };
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
 
-  const handleApiCall = () => {
-    const apiUrl = `https://bqke5kdb94.execute-api.us-east-2.amazonaws.com/Prod/kohls/product?upc=${upc}`;
+button {
+  padding: 8px 12px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setApiResponse(data);
-        setError(null);
-      })
-      .catch((error) => {
-        setError('API call error');
-        setApiResponse(null);
-      });
-  };
+.api-response {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+}
 
-  return (
-    <div>
-      <h1>Kohls Chrome Extension</h1>
-      <input type="text" value={upc} onChange={handleUpcChange} />
-      <button onClick={handleApiCall}>Run API Call</button>
-
-      {apiResponse && (
-        <div>
-          <h2>API Response:</h2>
-          <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
-        </div>
-      )}
-
-      {error && <p>Error: {error}</p>}
-    </div>
-  );
-};
-
-export default App;
+.error {
+  color: red;
+}
