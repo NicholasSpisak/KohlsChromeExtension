@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, ChangeEvent } from 'react';
 
-function App() {
+const App = () => {
+  const [upc, setUpc] = useState('');
+
+  const handleUpcChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setUpc(event.target.value);
+  };
+
+  const handleApiCall = () => {
+    // Make the API call using the UPC value
+    console.log('Making API call with UPC:', upc);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Kohls Chrome Extension</h1>
+      <input type="text" value={upc} onChange={handleUpcChange} />
+      <button onClick={handleApiCall}>Run API Call</button>
     </div>
   );
-}
+};
 
 export default App;
